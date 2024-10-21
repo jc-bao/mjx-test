@@ -17,6 +17,3 @@ I can understand if the batch size is too large, there would be not enough cuda 
 > Why different contact model shows different realtime factor?
 
 In `sphere` model, 
-
-> Why linesearch computation will go up if it is parallelized?
-

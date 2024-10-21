@@ -1,0 +1,7 @@
+model,fps,single_realtime_factor,batch_size
+g1_8dof_mjx_sphere,985369,664.41,32
+g1_8dof_mjx_capsule,1111680,706.51,32
+g1_8dof_mjx_sphere,1005170,633.33,32
+g1_8dof_mjx_capsule,1128237,722.33,32
+g1_8dof_mjx_sphere,974077,663.26,32
+g1_8dof_mjx_capsule,1123394,739.64,32

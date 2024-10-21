@@ -132,7 +132,14 @@ def plot_ls_iterations_abalation():
 def plot_batch_size_abalation_over_model():
     df = pd.read_csv('mjx_speed_test.csv')
     models = ['g1_8dof_mjx_sphere', 'g1_8dof_mjx_capsule']
-    
+    # add '4090' to the end of batch_size
+    df['batch_size'] = df['batch_size'].astype(str) + ' (4090)'
+
+    # append mjc data
+    mjc_df = pd.read_csv('mjc_speed_test.csv')
+    mjc_df['batch_size'] = mjc_df['batch_size'].astype(str) + ' (7950X)'
+    df = pd.concat([mjc_df,df])
+
     # create two subplots, one for fps, one for single_realtime_factor
     fig, axs = plt.subplots(2, 1, figsize=(6.4, 4.8)) 
 
@@ -140,30 +147,22 @@ def plot_batch_size_abalation_over_model():
     fig.suptitle(f'Batch Size Abalation Over Models')
 
     # plot fps with point markers
-    sns.lineplot(data=df, x='batch_size', y='fps', hue='model', ax=axs[0], marker='o')
-    # label out the best performing batch size
-    best_fps = df['fps'].max()
-    best_batch_size = df[df['fps'] == best_fps]['batch_size'].values[0]
-    axs[0].text(best_batch_size, best_fps, f'Best FPS: {best_fps:.1e} @ {best_batch_size}', ha='center', va='top')
-    axs[0].set_xscale('log')
+    sns.barplot(data=df, x='batch_size', y='fps', hue='model', ax=axs[0])
     axs[0].set_xlabel('Batch Size')
     axs[0].set_ylabel('FPS')
 
     # plot single_realtime_factor
-    sns.lineplot(data=df, x='batch_size', y='single_realtime_factor', hue='model', ax=axs[1], marker='o')
+    sns.barplot(data=df, x='batch_size', y='single_realtime_factor', hue='model', ax=axs[1])
     # label out the best performing batch size
-    best_single_realtime_factor = df['single_realtime_factor'].max()
-    best_batch_size = df[df['single_realtime_factor'] == best_single_realtime_factor]['batch_size'].values[0]
-    axs[1].text(best_batch_size, best_single_realtime_factor, f'Best Single Realtime Factor: {best_single_realtime_factor:.1f} @ {best_batch_size}', ha='left', va='top')
-    axs[1].set_xscale('log')
+    axs[1].set_ylim(0, 50)
     axs[1].set_xlabel('Batch Size')
     axs[1].set_ylabel('Single Realtime Factor')
 
     # save figure
     plt.tight_layout()
-    plt.savefig('./results/batch_size_abalation_over_model.png', dpi=300)
+    plt.savefig('./results/batch_size_abalation_over_model.png', dpi=100)
 
 if __name__ == '__main__':
-    plot_ls_iterations_abalation()
+    plot_batch_size_abalation_over_model()
     
     
