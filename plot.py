@@ -160,9 +160,7 @@ def plot_batch_size_abalation_over_model():
 
     # save figure
     plt.tight_layout()
-    plt.savefig('./results/batch_size_abalation_over_model.png', dpi=100)
+    plt.savefig('./results/batch_size_abalation_over_model.png', dpi=300)
 
 if __name__ == '__main__':
     plot_batch_size_abalation_over_model()
-    
-    

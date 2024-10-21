@@ -7,6 +7,9 @@ import mujoco
 from mujoco import mjx
 import pandas as pd
 
+import os
+os.environ['XLA_FLAGS'] = '--xla_gpu_triton_gemm_any=true'
+
 _MJCF = flags.DEFINE_string('mjcf', None, 'path to model `.xml` or `.mjb`', required=True)
 _BASE_PATH = flags.DEFINE_string(
     'base_path', None, 'base path, defaults to mujoco.mjx resource path'
@@ -60,7 +63,9 @@ Summary for {_BATCH_SIZE.value} parallel rollouts
  Total simulation time: {run_time:.2f} s
  Total steps per second: { steps / run_time:.0f}
  Total realtime factor: { steps * m.opt.timestep / run_time:.2f} x
- Total time per step: { 1e6 * run_time / steps:.2f} µs""")
+ Total time per step: { 1e6 * run_time / steps:.2f} µs
+ Single realtime factor: {steps * m.opt.timestep / run_time / _BATCH_SIZE.value:.2f} x
+ """)
   elif _OUTPUT.value == 'tsv':
     name = _MJCF.value.split('/')[-1]
     print(f'model: {name}\tjit: {jit_time:.2f}s\tfps: {steps / run_time:.0f}\tsingle_fps: {steps / run_time / _BATCH_SIZE.value:.0f}\tsingle_realtime_factor: {steps * m.opt.timestep / run_time / _BATCH_SIZE.value:.2f}x')

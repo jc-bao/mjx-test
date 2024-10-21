@@ -141,15 +141,17 @@
                                         density="0"
                                         rgba="0.2 0.2 0.2 1" mesh="left_ankle_roll_link"
                                         class="visual" />
-                                    <geom size="0.005" pos="-0.05 0.025 -0.03"
+                                    <geom name="l1" size="0.005" pos="-0.05 0.025 -0.03"
                                         rgba="0.2 0.2
                                     0.2 1"
                                         condim="3" conaffinity="0" contype="1" group="3" />
-                                    <geom size="0.005" pos="-0.05 -0.025 -0.03" rgba="0.2 0.2 0.2 1"
+                                    <geom name="l2" size="0.005" pos="-0.05 -0.025 -0.03"
+                                        rgba="0.2 0.2 0.2 1"
                                         condim="3" conaffinity="0" contype="1" group="3" />
-                                    <geom size="0.005" pos="0.12 0.03 -0.03" rgba="0.2 0.2 0.2 1"
+                                    <geom name="l3" size="0.005" pos="0.12 0.03 -0.03"
                                         condim="3" conaffinity="0" contype="1" group="3" />
-                                    <geom size="0.005" pos="0.12 -0.03 -0.03" rgba="0.2 0.2 0.2 1"
+                                    <geom name="l4" size="0.005" pos="0.12 -0.03 -0.03"
+                                        rgba="0.2 0.2 0.2 1"
                                         condim="3" conaffinity="0" contype="1" group="3" />
                                     <!-- <geom size="0.02" pos="0.12 0.0 -0.03" rgba="0.2 0.2 0.2 1"
                                         class="foot" />
@@ -235,19 +237,19 @@
                                         density="0"
                                         rgba="0.2 0.2 0.2 1" mesh="right_ankle_roll_link"
                                         class="visual" />
-                                    <geom size="0.005" pos="-0.05 0.025 -0.03"
+                                    <geom name="r1" size="0.005" pos="-0.05 0.025 -0.03"
                                         rgba="0.2 0.2
                                     0.2 1"
                                         condim="3" conaffinity="0" contype="1" group="3" />
-                                    <geom size="0.005" pos="-0.05 -0.025 -0.03"
+                                    <geom name="r2" size="0.005" pos="-0.05 -0.025 -0.03"
                                         rgba="0.2 0.2
                                     0.2 1"
                                         condim="3" conaffinity="0" contype="1" group="3" />
-                                    <geom size="0.005" pos="0.12 0.03 -0.03"
+                                    <geom name="r3" size="0.005" pos="0.12 0.03 -0.03"
                                         rgba="0.2 0.2 0.2
                                     1"
                                         condim="3" conaffinity="0" contype="1" group="3" />
-                                    <geom size="0.005" pos="0.12 -0.03 -0.03"
+                                    <geom name="r4" size="0.005" pos="0.12 -0.03 -0.03"
                                         rgba="0.2 0.2 0.2
                                     1"
                                         condim="3" conaffinity="0" contype="1" group="3" />
@@ -460,6 +462,18 @@
         <motor name="right_elbow" joint="right_elbow_joint" ctrlrange="-25 25" />
         <motor name="right_wrist_roll" joint="right_wrist_roll_joint" ctrlrange="-25 25" /> -->
     </actuator>
+
+    <contact>
+        <pair name="r1_floor" geom1="r1" geom2="floor" />
+        <pair name="r2_floor" geom1="r2" geom2="floor" />
+        <pair name="r3_floor" geom1="r3" geom2="floor" />
+        <pair name="r4_floor" geom1="r4" geom2="floor" />
+        <pair name="l1_floor" geom1="l1" geom2="floor" />
+        <pair name="l2_floor" geom1="l2" geom2="floor" />
+        <pair name="l3_floor" geom1="l3" geom2="floor" />
+        <pair name="l4_floor" geom1="l4" geom2="floor" />
+        <exclude name="r_l" body1="left_ankle_roll_link" body2="right_ankle_roll_link" />
+    </contact>
 
     <keyframe>
         <key name="home"
