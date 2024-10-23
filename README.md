@@ -21,3 +21,5 @@ Simplify 4-sphere model to single-capsule model. Originally, we use 4-sphere mod
 ### Why realtime factor will be affected by batch size?
 
 Given that simplifying the contact model doesn't change the performance much, does it mean that the performance is limited by other factors? If so, which ones could be the bottleneck? Or it is impossible to get close to realtime factor 50?
+
+### Is there anyway to dynamically update obstacles in mujoco?
